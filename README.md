@@ -13,7 +13,7 @@ A WHMCS module that allows users accept payments using Paystack
 ## Pre-Installation
 
 - A paystack account is needed. Sign up at: 
-[https://dashboard.paystack.co/#/signup][link-signup]. 
+[https://dashboard.paystack.co/#/signup] [link-signup]. 
 
 To receive live payments, you should request a Go-live after you are done with configuration and have successfully made a test payment.
 
