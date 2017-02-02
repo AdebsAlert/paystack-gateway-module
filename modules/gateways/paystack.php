@@ -61,7 +61,7 @@ function paystack_config()
             'Default' => 'pk_live_xxx'
         ),
         'testSecretKey' => array(
-            'FriendlyName' => 'Test Secrect Key',
+            'FriendlyName' => 'Test Secret Key',
             'Type' => 'text',
             'Size' => '32',
             'Default' => 'sk_test_xxx'
