@@ -169,7 +169,7 @@ if ($success) {
     $amount = floatval($txStatus->amount)/100;
     if ($gatewayParams['convertto']) {
         $result = select_query("tblclients", "tblinvoices.invoicenum,tblclients.currency,tblcurrencies.code", array("tblinvoices.id" => $invoiceId), "", "", "", "tblinvoices ON tblinvoices.userid=tblclients.id INNER JOIN tblcurrencies ON tblcurrencies.id=tblclients.currency");
-        $data = mysql_fetch_array($result);
+        $data = mysqli_fetch_array($result);
         $invoice_currency_id = $data['currency'];
 
         $converto_amount = convertCurrency($amount, $gatewayParams['convertto'], $invoice_currency_id);
@@ -232,13 +232,13 @@ function verifyTransaction($trxref, $secretKey)
         //close connection
         curl_close($ch);
 
-        // Then, after your curl_exec call:
         $body = json_decode($response);
+        //check the body for a status response
         if (!$body->status) {
-            // paystack has an error message for us
+            // paystack has an error mesage to display
             $txStatus->error = "Paystack API said: " . $body->message;
         } else {
-            // get body returned by Paystack API
+            // get body return by Paystack API
             $txStatus = $body->data;
         }
     }
