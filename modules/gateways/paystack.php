@@ -107,6 +107,7 @@ function paystack_link($params)
     $invoiceId = $params['invoiceid'];
     $amountinkobo = intval(floatval($params['amount'])*100);
     $currency = $params['currency'];
+    $plan = $params['plan'];
 
     if (!(strtoupper($currency) == 'NGN')) {
         return ("Paystack only accepts NGN payments for now.");
@@ -121,6 +122,7 @@ function paystack_link($params)
             'email'=>$email,
             'phone'=>$phone,
             'amountinkobo'=>$amountinkobo,
+            'plan'=>$plan,
             'go'=>'standard'
         ));
     $callbackUrl = 'http' . ($isSSL ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] .
@@ -162,6 +164,7 @@ function paystack_link($params)
           email: \''.addslashes(trim($email)).'\',
           phone: \''.addslashes(trim($phone)).'\',
           amount: '.$amountinkobo.',
+          plan: '.$plan.',
           callback: function(response){
             window.location.href = \''.addslashes($callbackUrl).'&trxref=\' + response.trxref;
           },
