@@ -237,7 +237,7 @@ function verifyTransaction($trxref, $secretKey)
         $body = json_decode($response);
         //check the body for a status response
         if (!$body->status) {
-            // paystack has an error mesage to display
+            // paystack has an error message to display
             $txStatus->error = "Paystack API said: " . $body->message;
         } else {
             // get body return by Paystack API
