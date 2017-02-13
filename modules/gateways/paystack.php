@@ -122,7 +122,6 @@ function paystack_link($params)
             'email'=>$email,
             'phone'=>$phone,
             'amountinkobo'=>$amountinkobo,
-            'plan'=>$plan,
             'go'=>'standard'
         ));
     $callbackUrl = 'http' . ($isSSL ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] .
@@ -133,21 +132,21 @@ function paystack_link($params)
         ));
 
     $code = '
-    <form target="hiddenIFrame" action="about:blank">
+        <form target="hiddenIFrame" action="about:blank">
         <script src="https://js.paystack.co/v1/inline.js"></script>
         <div class="payment-btn-container2"></div>
         <script>
             // load jQuery 1.12.3 if not loaded
             (typeof $ === \'undefined\') && document.write("<scr" + "ipt type=\"text\/javascript\" '.
-            'src=\"https:\/\/code.jquery.com\/jquery-1.12.3.min.js\"><\/scr" + "ipt>");
+        'src=\"https:\/\/code.jquery.com\/jquery-1.12.3.min.js\"><\/scr" + "ipt>");
         </script>
         <script>
             $(function() {
                 var paymentMethod = $(\'select[name="gateway"]\').val();
                 if (paymentMethod === \'paystack\') {
                     $(\'.payment-btn-container2\').hide();
-                    var toAppend = \'<button type="button"'. 
-                   ' onclick="payWithPaystack()"> '.addslashes($params['langpaynow']).'</button>\';
+                    var toAppend = \'<button type="button"'.
+        ' onclick="payWithPaystack()"> '.addslashes($params['langpaynow']).'</button>\';
                     $(\'.payment-btn-container\').append(toAppend);
                    if($(\'.payment-btn-container\').length===0){
                      $(\'select[name="gateway"]\').after(toAppend);
@@ -156,6 +155,7 @@ function paystack_link($params)
             });
         </script>
     </form>
+    
     <div class="hidden" style="display:none"><iframe name="hiddenIFrame"></iframe></div>
     <script>
         var paystackIframeOpened = false;
@@ -164,7 +164,6 @@ function paystack_link($params)
           email: \''.addslashes(trim($email)).'\',
           phone: \''.addslashes(trim($phone)).'\',
           amount: '.$amountinkobo.',
-          plan: '.$plan.',
           callback: function(response){
             window.location.href = \''.addslashes($callbackUrl).'&trxref=\' + response.trxref;
           },

@@ -45,7 +45,6 @@ if(strtolower(filter_input(INPUT_GET, 'go'))==='standard'){
     $amountinkobo = filter_input(INPUT_GET, 'amountinkobo');
     $email = filter_input(INPUT_GET, 'email');
     $phone = filter_input(INPUT_GET, 'phone');
-    $plan = filter_input(INPUT_GET, 'plan');
 
     $callback_url = 'http' . ($isSSL ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] .
         $_SERVER['SCRIPT_NAME'] . '?invoiceid=' . rawurlencode($invoiceId);
@@ -71,7 +70,6 @@ if(strtolower(filter_input(INPUT_GET, 'go'))==='standard'){
             "amount"=>$amountinkobo,
             "email"=>$email,
             "phone"=>$phone,
-            "plan"=>$plan,
             "callback_url"=>$callback_url
             )
         )
