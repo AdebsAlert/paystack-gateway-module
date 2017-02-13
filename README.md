@@ -18,9 +18,11 @@ A WHMCS module that allows users accept payments using Paystack
 To receive live payments, you should request a Go-live after you are done with configuration and have successfully made a test payment.
 
 ## Installation
-1. Copy [paystack.php](modules/gateways/paystack.php) in [modules/gateways](modules/gateways) to the `/modules/gateways/` folder of your WHMCS installation.
+1. Copy [paystack.php](modules/gateways/paystack.php) in [modules/gateways](modules/gateways) to the `/modules/gateways/` folder of your WHMCS root directory
 
-2. Copy [paystack.php](modules/gateways/callback/paystack.php) in [modules/gateways/callback](modules/gateways/callback) to the `/modules/gateways/callback` folder of your WHMCS installation.
+2. Copy [paystack.php](modules/gateways/callback/paystack.php) in [modules/gateways/callback](modules/gateways/callback) to the `/modules/gateways/callback` folder of your WHMCS root directory.
+
+3. Once uploaded, login to WHMCS, go to Setup > Payment Gateways to activate.
 
 ## Post-Installation
 

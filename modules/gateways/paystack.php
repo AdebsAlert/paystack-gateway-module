@@ -17,7 +17,7 @@ if (!defined("WHMCS")) {
 function gatewaymodule_MetaData()
 {
     return array(
-        'DisplayName' => 'Paystack Payment Gateway Module',
+        'DisplayName' => 'Paystack (Naira) Payment Gateway',
         'APIVersion' => '1.1', // Use API Version 1.1
         'DisableLocalCredtCardInput' => true,
         'TokenisedStorage' => false,
@@ -34,7 +34,7 @@ function paystack_config()
     return array(
         'FriendlyName' => array(
             'Type' => 'System',
-            'Value' => 'Paystack (Naira Debit/Credit Cards) Payment Gateway Module'
+            'Value' => 'Paystack (Naira) Payment Gateway'
         ),
         'gatewayLogs' => array(
             'FriendlyName' => 'Gateway logs',
