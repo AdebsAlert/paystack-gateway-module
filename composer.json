@@ -1,11 +1,13 @@
 {
     "name": "paystack/paystack-whmcs",
-    "description": "Paystack WHMCS Gateway",
+    "description": "Paystack WHMCS Payment Gateway",
     "keywords": [
         "whmcs",
         "web host automation platform",
         "third party gateway module",
         "gateway module",
+        "payment plan",
+        "recurring payment",
         "third party gateway",
         "paystack",
         "paystack payment",
@@ -16,13 +18,13 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paystack Development Team",
-            "email": "support@paystack.com",
-            "homepage": "https://www.paystack.com/",
+            "name": "AdebsAlert",
+            "email": "adebsalert@gmail.com",
+            "homepage": "https://github.com/adebsalert",
             "role": "Developer"
         }
     ],
     "support": {
-        "email": "support@paystack.com"
+        "email": "adebsalert@gmail.com"
     }
 }
