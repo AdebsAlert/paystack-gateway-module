@@ -93,8 +93,8 @@ function paystack_link($params)
     // Client
     $email = $params['clientdetails']['email'];
     $phone = $params['clientdetails']['phonenumber'];
-    $params['langpaynow'] = 
-        array_key_exists('langpaynow', $params) ? 
+    $params['langpaynow'] =
+        array_key_exists('langpaynow', $params) ?
             $params['langpaynow'] : 'Pay with ATM' ;
 
     // Config Options
@@ -105,10 +105,10 @@ function paystack_link($params)
         $publicKey = $params['livePublicKey'];
         $secretKey = $params['liveSecretKey'];
     }
-    
+
     // check if there is an id in the GET meaning the invoice was loaded directly
     $paynowload = ( !array_key_exists('id', $_GET) );
-    
+
     // Invoice
     $invoiceId = $params['invoiceid'];
     $amountinkobo = intval(floatval($params['amount'])*100);
@@ -145,6 +145,8 @@ function paystack_link($params)
                 'plan'=>$plan,
                 'go'=>'standard'
             ));
+
+        var_dump($plan_3); exit;
     }else{
         $isSSL = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443);
         $fallbackUrl = 'http' . ($isSSL ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] .
@@ -292,11 +294,6 @@ function paystack_link($params)
        ' . ( $paynowload ? 'setTimeout("payWithPaystack()", 5100);' : '' ) . '
     </script>';
     }
-    
-
-
-
-
 
     return $code;
 }

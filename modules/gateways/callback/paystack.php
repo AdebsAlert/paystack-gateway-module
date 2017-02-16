@@ -1,13 +1,13 @@
 <?php
 /**
-                                                                    
- *   Paystack Payment Gateway                                           
- *   Version: 1.0.0                                                     
- *   Build Date: 1 Feb 2017  
- *   Author: AdebsAlert 
- *   @copyright Copyright(c) Cregital Design Agency                                       
- 
-************************************************************************/
+
+ *   Paystack Payment Gateway
+ *   Version: 1.0.0
+ *   Build Date: 1 Feb 2017
+ *   Author: AdebsAlert
+ *   @copyright Copyright(c) Cregital Design Agency
+
+ ************************************************************************/
 
 // Require libraries needed for gateway module functions.
 require_once __DIR__ . '/../../../init.php';
@@ -41,7 +41,7 @@ if(strtolower(filter_input(INPUT_GET, 'go'))==='standard'){
     $ch = curl_init();
 
     $isSSL = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443);
-    
+
     $amountinkobo = filter_input(INPUT_GET, 'amountinkobo');
     $email = filter_input(INPUT_GET, 'email');
     $phone = filter_input(INPUT_GET, 'phone');
@@ -57,45 +57,42 @@ if(strtolower(filter_input(INPUT_GET, 'go'))==='standard'){
         $ch,
         CURLOPT_HTTPHEADER,
         array(
-        'Authorization: Bearer '. trim($secretKey),
-        'Content-Type: application/json'
+            'Authorization: Bearer '. trim($secretKey),
+            'Content-Type: application/json'
         )
     );
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
 
-
-    //check if a plan code was passed:
-    if($plan != '') {
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
+    if($plan != ''){
         curl_setopt(
             $ch,
             CURLOPT_POSTFIELDS,
             json_encode(
                 array(
-                    "amount" => $amountinkobo,
-                    "email" => $email,
-                    "phone" => $phone,
-                    "plan" => $plan,
-                    "callback_url" => $callback_url
+                    "amount"=>$amountinkobo,
+                    "email"=>$email,
+                    "phone"=>$phone,
+                    "plan"=>$plan,
+                    "callback_url"=>$callback_url
                 )
             )
         );
-        }else{
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
+    }else{
         curl_setopt(
             $ch,
             CURLOPT_POSTFIELDS,
             json_encode(
                 array(
-                    "amount" => $amountinkobo,
-                    "email" => $email,
-                    "phone" => $phone,
-                    "callback_url" => $callback_url
+                    "amount"=>$amountinkobo,
+                    "email"=>$email,
+                    "phone"=>$phone,
+                    "callback_url"=>$callback_url
                 )
             )
         );
     }
+
 
 
     curl_setopt($ch, CURLOPT_HEADER, false);
@@ -215,7 +212,7 @@ if ($success) {
 
     // load invoice
     $isSSL = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443);
-        
+
     $invoice_url = 'http' . ($isSSL ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] .
         substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/')) .
         '/../../../viewinvoice.php?id='.
@@ -237,16 +234,16 @@ function verifyTransaction($trxref, $secretKey)
         $ch,
         CURLOPT_HTTPHEADER,
         array(
-        'Authorization: Bearer '. trim($secretKey)
+            'Authorization: Bearer '. trim($secretKey)
         )
     );
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_SSLVERSION, 6);
-    
+
     // exec the cURL
     $response = curl_exec($ch);
-    
+
     // should be 0
     if (curl_errno($ch)) {
         // curl ended with an error
