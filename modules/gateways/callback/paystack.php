@@ -45,6 +45,7 @@ if(strtolower(filter_input(INPUT_GET, 'go'))==='standard'){
     $amountinkobo = filter_input(INPUT_GET, 'amountinkobo');
     $email = filter_input(INPUT_GET, 'email');
     $phone = filter_input(INPUT_GET, 'phone');
+    $plan = filter_input(INPUT_GET, 'plan');
 
     $callback_url = 'http' . ($isSSL ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] .
         $_SERVER['SCRIPT_NAME'] . '?invoiceid=' . rawurlencode($invoiceId);
@@ -60,20 +61,43 @@ if(strtolower(filter_input(INPUT_GET, 'go'))==='standard'){
         'Content-Type: application/json'
         )
     );
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt(
-        $ch,
-        CURLOPT_POSTFIELDS,
-        json_encode(
-            array(
-            "amount"=>$amountinkobo,
-            "email"=>$email,
-            "phone"=>$phone,
-            "callback_url"=>$callback_url
+
+
+    //check if a plan code was passed:
+    if($plan != '') {
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt(
+            $ch,
+            CURLOPT_POSTFIELDS,
+            json_encode(
+                array(
+                    "amount" => $amountinkobo,
+                    "email" => $email,
+                    "phone" => $phone,
+                    "plan" => $plan,
+                    "callback_url" => $callback_url
+                )
             )
-        )
-    );
+        );
+        }else{
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt(
+            $ch,
+            CURLOPT_POSTFIELDS,
+            json_encode(
+                array(
+                    "amount" => $amountinkobo,
+                    "email" => $email,
+                    "phone" => $phone,
+                    "callback_url" => $callback_url
+                )
+            )
+        );
+    }
+
+
     curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_SSLVERSION, 6);
 
